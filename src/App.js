@@ -1,25 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+let uploadButton = document.getElementById("upload-button");
+let chosenImage = document.getElementById("chosen-image");
+let fileName = document.getElementById("file-name");
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+uploadButton.onchange = () => {
+    let reader = new FileReader();
+    reader.readAsDataURL(uploadButton.files[0]);
+    reader.onload = () => {
+        chosenImage.setAttribute("src",reader.result);
+    }
+    fileName.textContent = uploadButton.files[0].name;
 }
-
-export default App;
